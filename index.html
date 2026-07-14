@@ -1,230 +1,345 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moving Out Sale</title>
+<style>
+  :root {
+    --bg: #f6f4f1;
+    --surface: #ffffff;
+    --text: #201d1a;
+    --muted: #6b6560;
+    --border: #e7e2db;
+    --accent: #c2592f;
+    --accent-soft: #f3e2d8;
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #171513;
+      --surface: #211e1b;
+      --text: #f2eee8;
+      --muted: #a49d94;
+      --border: #37322c;
+      --accent: #e08256;
+      --accent-soft: #3a2a20;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+  .tagline { color: var(--muted); font-size: 1.05rem; margin: 0 0 16px; }
+  .blurb { max-width: 46ch; margin: 0; }
+
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    min-width: 220px;
+    height: fit-content;
+  }
+  .contact-card dt {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+  .contact-card dt:first-child { margin-top: 0; }
+  .contact-card dd { margin: 2px 0 0; font-weight: 600; }
+  .print-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .print-link:hover { text-decoration: underline; }
+
+  h2 {
+    font-size: 1.4rem;
+    margin: 48px 0 20px;
+  }
+
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .item-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .item-photo {
+    aspect-ratio: 4 / 3;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .item-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .item-photo.split { gap: 2px; }
+  .item-photo.split img { width: 50%; }
+  .item-body { padding: 16px 18px 20px; }
+  .item-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .item-title-row h3 { margin: 0; font-size: 1.05rem; }
+  .price {
+    color: var(--accent);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .dims {
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .dims li {
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .chips li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 0.92rem;
+  }
+
+  .cta {
+    margin-top: 56px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .cta h2 { margin: 0; color: #fff; font-size: 1.3rem; }
+  .cta p { margin: 4px 0 0; opacity: 0.9; }
+  .cta a {
+    background: #fff;
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+</style>
 </head>
+<body>
 
-<body style="font-family:Arial,sans-serif;max-width:1000px;margin:auto;background:#fafafa;color:#222;">
+<div class="wrap">
 
-<table width="100%" cellpadding="10">
-<tr>
+<header>
+  <div>
+    <h1>🏡 Moving Out Sale</h1>
+    <p class="tagline">Furniture &amp; home items available &middot; pickup in community only</p>
+    <p class="blurb">Everything is in good condition and available on a first-come, first-served basis.</p>
+  </div>
 
-<td width="70%">
-<h1>🏡 Moving Out Sale</h1>
-
-<h3>
-Furniture & Home Items Available<br>
-Pickup in Community Only
-</h3>
-
-<p>
-Everything is in good condition and available on a first-come,
-first-served basis.
-</p>
-
-</td>
-
-<td width="30%" align="right">
-
-<b>📍 Location</b><br>
-_________________<br><br>
-
-<b>🏢 Community</b><br>
-_________________<br><br>
-
-<b>📱 Text Me</b><br>
-(XXX) XXX-XXXX<br><br>
-
-<a href="flyer.html">🖨️ Print Flyer (QR Code)</a>
-
-</td>
-
-</tr>
-</table>
-
-<hr>
+  <dl class="contact-card">
+    <dt>📍 Location</dt>
+    <dd>_________________</dd>
+    <dt>🏢 Community</dt>
+    <dd>_________________</dd>
+    <dt>📱 Text Me</dt>
+    <dd>(XXX) XXX-XXXX</dd>
+    <a class="print-link" href="flyer.html">🖨️ Print flyer with QR code</a>
+  </dl>
+</header>
 
 <h2>Available Items</h2>
+<div class="items">
 
-<table width="100%" cellspacing="20">
+  <div class="item-card">
+    <div class="item-photo split">
+      <img src="photos/sofa-bed-folded.jpg" alt="Sofa bed, folded">
+      <img src="photos/sofa-bed-open.jpg" alt="Sofa bed, opened">
+    </div>
+    <div class="item-body">
+      <div class="item-title-row"><h3>Sofa Bed</h3><span class="price">$100</span></div>
+      <ul class="dims">
+        <li>76" wide</li>
+        <li>32" deep (closed)</li>
+        <li>42" deep (open)</li>
+        <li>22" arm height</li>
+        <li>15" seat height</li>
+      </ul>
+    </div>
+  </div>
 
-<tr>
+  <div class="item-card">
+    <div class="item-photo"><img src="photos/tv-stand.jpg" alt="Fire TV and TV stand"></div>
+    <div class="item-body">
+      <div class="item-title-row"><h3>Fire TV + Stand</h3><span class="price">$80</span></div>
+      <ul class="dims">
+        <li>38" Fire TV</li>
+        <li>TV stand included</li>
+      </ul>
+    </div>
+  </div>
 
-<td width="50%" valign="top">
+  <div class="item-card">
+    <div class="item-photo"><img src="photos/mirror.jpg" alt="Full-length mirror"></div>
+    <div class="item-body">
+      <div class="item-title-row"><h3>Mirror</h3><span class="price">$22</span></div>
+      <ul class="dims">
+        <li>63" height</li>
+        <li>16" width</li>
+        <li>Adjustable stand</li>
+      </ul>
+    </div>
+  </div>
 
-<img src="photos/sofa-bed-folded.jpg" width="49%">
-<img src="photos/sofa-bed-open.jpg" width="49%">
+  <div class="item-card">
+    <div class="item-photo"><img src="photos/office-chair.jpg" alt="Office chair"></div>
+    <div class="item-body">
+      <div class="item-title-row"><h3>Office Chair</h3><span class="price">$12</span></div>
+      <ul class="dims">
+        <li>26" seat width</li>
+        <li>34" total height</li>
+      </ul>
+    </div>
+  </div>
 
-<h3>Sofa Bed — $100</h3>
+  <div class="item-card">
+    <div class="item-photo"><img src="photos/ikea-drawer.jpg" alt="IKEA drawer"></div>
+    <div class="item-body">
+      <div class="item-title-row"><h3>IKEA Drawer</h3><span class="price">$10</span></div>
+      <ul class="dims">
+        <li>32" wide</li>
+        <li>19" deep</li>
+        <li>30" height</li>
+      </ul>
+    </div>
+  </div>
 
-<b>Dimensions</b>
+  <div class="item-card">
+    <div class="item-photo"><img src="photos/mattress.jpg" alt="Mattress"></div>
+    <div class="item-body">
+      <div class="item-title-row"><h3>Mattress</h3><span class="price">Full $70 / Twin $35</span></div>
+    </div>
+  </div>
 
-<ul>
-<li>76" Wide</li>
-<li>32" Deep (Closed)</li>
-<li>42" Deep (Open)</li>
-<li>22" Arm Height</li>
-<li>15" Seat Height</li>
-</ul>
+  <div class="item-card">
+    <div class="item-photo"><img src="photos/bookshelf.jpg" alt="Bookshelf"></div>
+    <div class="item-body">
+      <div class="item-title-row"><h3>Bookshelf (Big)</h3><span class="price">$20</span></div>
+      <ul class="dims">
+        <li>73" height</li>
+        <li>32" wide</li>
+        <li>16" deep</li>
+      </ul>
+    </div>
+  </div>
 
-</td>
+  <div class="item-card">
+    <div class="item-photo"><img src="photos/recliner-chair.jpg" alt="Floor recliner chair"></div>
+    <div class="item-body">
+      <div class="item-title-row"><h3>Floor Recliner Chair</h3><span class="price">$15</span></div>
+    </div>
+  </div>
 
-<td width="50%" valign="top">
+  <div class="item-card">
+    <div class="item-photo"><img src="photos/s-table.jpg" alt="S-shape small table"></div>
+    <div class="item-body">
+      <div class="item-title-row"><h3>S-Shape Small Table</h3><span class="price">$10</span></div>
+      <ul class="dims">
+        <li>28" height</li>
+        <li>12" wide</li>
+      </ul>
+    </div>
+  </div>
 
-<img src="photos/tv-stand.jpg" width="100%">
+  <div class="item-card">
+    <div class="item-photo"><img src="photos/organizer.jpg" alt="Drawer organizer"></div>
+    <div class="item-body">
+      <div class="item-title-row"><h3>Drawer Organizer</h3><span class="price">$12</span></div>
+      <ul class="dims">
+        <li>33" long</li>
+        <li>11.5" wide</li>
+      </ul>
+    </div>
+  </div>
 
-<h3>Fire TV + TV Stand — $80</h3>
-
-<ul>
-<li>38" Fire TV</li>
-<li>TV Stand Included</li>
-</ul>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-<img src="photos/mirror.jpg" width="100%">
-
-<h3>Mirror — $22</h3>
-
-<ul>
-<li>63" Height</li>
-<li>16" Width</li>
-<li>Adjustable Stand</li>
-</ul>
-
-</td>
-
-<td>
-
-<img src="photos/office-chair.jpg" width="100%">
-
-<h3>Office Chair — $12</h3>
-
-<ul>
-<li>26" Seat Width</li>
-<li>34" Total Height</li>
-</ul>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-<img src="photos/ikea-drawer.jpg" width="100%">
-
-<h3>IKEA Drawer — $10</h3>
-
-<ul>
-<li>32" Wide</li>
-<li>19" Deep</li>
-<li>30" Height</li>
-</ul>
-
-</td>
-
-<td>
-
-<img src="photos/mattress.jpg" width="100%">
-
-<h3>Mattress — Full $70 / Twin $35</h3>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-<img src="photos/bookshelf.jpg" width="100%">
-
-<h3>Bookshelf (Big) — $20</h3>
-
-<ul>
-<li>73" Height</li>
-<li>32" Wide</li>
-<li>16" Deep</li>
-</ul>
-
-</td>
-
-<td>
-
-<img src="photos/recliner-chair.jpg" width="100%">
-
-<h3>Floor Recliner Chair — $15</h3>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-<img src="photos/s-table.jpg" width="100%">
-
-<h3>S-Shape Small Table — $10</h3>
-
-<ul>
-<li>28" Height</li>
-<li>12" Wide</li>
-</ul>
-
-</td>
-
-<td>
-
-<img src="photos/organizer.jpg" width="100%">
-
-<h3>Drawer Organizer — $12</h3>
-
-<ul>
-<li>33" Long</li>
-<li>11.5" Wide</li>
-</ul>
-
-</td>
-
-</tr>
-
-</table>
-
-<hr>
+</div>
 
 <h2>Other Available Items</h2>
-
-<ul>
-
-<li>✔ Desk</li>
-
-<li>✔ Storage Cabinet</li>
-
-<li>✔ Coffee Table</li>
-
-<li>✔ Side Table</li>
-
+<ul class="chips">
+  <li>Desk</li>
+  <li>Storage Cabinet</li>
+  <li>Coffee Table</li>
+  <li>Side Table</li>
 </ul>
 
-<hr>
+<div class="cta">
+  <div>
+    <h2>Interested in something?</h2>
+    <p>Text me at (XXX) XXX-XXXX</p>
+  </div>
+  <a href="sms:+1XXXXXXXXXX">📱 Text Me</a>
+</div>
 
-<h2>Interested?</h2>
-
-<p>
-
-📱 Text me at <b>(XXX) XXX-XXXX</b>
-
-</p>
-
+</div>
 </body>
 </html>
