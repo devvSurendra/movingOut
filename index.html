@@ -69,6 +69,8 @@
   }
   .contact-card dt:first-child { margin-top: 0; }
   .contact-card dd { margin: 2px 0 0; font-weight: 600; }
+  .phone-link { color: inherit; text-decoration: none; }
+  .phone-link:hover { text-decoration: underline; }
   .print-link {
     display: inline-flex;
     align-items: center;
@@ -100,7 +102,7 @@
     flex-direction: column;
   }
   .item-photo {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 4;
     background: var(--accent-soft);
     display: flex;
     align-items: center;
@@ -110,7 +112,7 @@
   .item-photo img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
   }
   .item-photo.split { gap: 2px; }
@@ -145,45 +147,6 @@
     padding: 3px 10px;
   }
 
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-  .chips li {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 8px 16px;
-    font-size: 0.92rem;
-  }
-
-  .cta {
-    margin-top: 56px;
-    background: var(--accent);
-    color: #fff;
-    border-radius: var(--radius);
-    padding: 28px 32px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-  }
-  .cta h2 { margin: 0; color: #fff; font-size: 1.3rem; }
-  .cta p { margin: 4px 0 0; opacity: 0.9; }
-  .cta a {
-    background: #fff;
-    color: var(--accent);
-    font-weight: 700;
-    text-decoration: none;
-    padding: 12px 22px;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
 </style>
 </head>
 <body>
@@ -203,7 +166,7 @@
     <dt>🏢 Community</dt>
     <dd>_________________</dd>
     <dt>📱 Text Me</dt>
-    <dd>(XXX) XXX-XXXX</dd>
+    <dd><a class="phone-link" href="tel:+1XXXXXXXXXX">(XXX) XXX-XXXX</a></dd>
     <a class="print-link" href="flyer.html">🖨️ Print flyer with QR code</a>
   </dl>
 </header>
@@ -275,9 +238,16 @@
   </div>
 
   <div class="item-card">
-    <div class="item-photo"><img src="photos/mattress.jpg" alt="Mattress"></div>
+    <div class="item-photo"><img src="photos/mattress-full.jpg" alt="Full size mattress"></div>
     <div class="item-body">
-      <div class="item-title-row"><h3>Mattress</h3><span class="price">Full $70 / Twin $35</span></div>
+      <div class="item-title-row"><h3>Mattress (Full)</h3><span class="price">$70</span></div>
+    </div>
+  </div>
+
+  <div class="item-card">
+    <div class="item-photo"><img src="photos/mattress-twin.jpg" alt="Twin size mattress"></div>
+    <div class="item-body">
+      <div class="item-title-row"><h3>Mattress (Twin)</h3><span class="price">$35</span></div>
     </div>
   </div>
 
@@ -322,22 +292,6 @@
     </div>
   </div>
 
-</div>
-
-<h2>Other Available Items</h2>
-<ul class="chips">
-  <li>Desk</li>
-  <li>Storage Cabinet</li>
-  <li>Coffee Table</li>
-  <li>Side Table</li>
-</ul>
-
-<div class="cta">
-  <div>
-    <h2>Interested in something?</h2>
-    <p>Text me at (XXX) XXX-XXXX</p>
-  </div>
-  <a href="sms:+1XXXXXXXXXX">📱 Text Me</a>
 </div>
 
 </div>
